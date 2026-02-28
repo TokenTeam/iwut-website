@@ -17,18 +17,17 @@ export default function Home() {
       setDownloadUrl(
         "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E5%90%BE%E7%90%86/id1494650352"
       );
-    } else if (detectedDevice === "HMOS") {
-      setDownloadUrl("https://download.tokenteam.dev/latest.apk");
     } else {
       setDownloadUrl("https://download.tokenteam.dev/latest.apk");
     }
   }, []);
 
-  const handleDownloadClick = async () => {
-    try {
-      await axios.get("https://count.api.tokenteam.dev/?project=iwut-download");
-    } catch (error) {
-      console.error("Count failed:", error);
+  const handleDownloadClick = () => {
+    axios.get("https://count.api.tokenteam.dev/?project=iwut-download")
+      .catch(error => console.error(error));
+    
+    if (downloadUrl) {
+      window.open(downloadUrl, "_blank");
     }
   };
 
@@ -79,16 +78,10 @@ export default function Home() {
               ) as HTMLButtonElement;
               if (btn) {
                 btn.classList.remove("shine");
-                // 触发重排以重新开始动画
                 void btn.offsetWidth;
                 btn.classList.add("shine");
               }
-
-              if (downloadUrl) {
-                handleDownloadClick().then(() => {
-                  window.open(downloadUrl, "_blank");
-                });
-              }
+              handleDownloadClick();
             }}
             className="download-button shine rounded-lg border border-solid border-white/20 flex items-center justify-center text-white gap-2 hover:bg-white/20 font-medium text-sm sm:text-base h-12 px-6 sm:px-10 w-72"
           >
@@ -106,7 +99,7 @@ export default function Home() {
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            <span>下载 {device} 版</span>
+            <span>下载 {device === "iOS" ? "iOS" : "Android"} 版</span>
           </button>
           </div>
         </div>
