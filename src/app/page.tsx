@@ -23,12 +23,22 @@ export default function Home() {
   }, []);
 
   const handleDownloadClick = () => {
+    if (device === "iOS" && downloadUrl) {
+      window.location.href = downloadUrl;
+    } 
+
+    else if (downloadUrl) {
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
     axios.get("https://count.api.tokenteam.dev/?project=iwut-download")
       .catch(error => console.error(error));
-    
-    if (downloadUrl) {
-      window.open(downloadUrl, "_blank");
-    }
   };
 
   useEffect(() => {
