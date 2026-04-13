@@ -18,7 +18,7 @@ export default function Home() {
         "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E5%90%BE%E7%90%86/id1494650352"
       );
     } else {
-      setDownloadUrl("https://download.tokenteam.dev/latest.apk");
+      setDownloadUrl("https://download.tokenteam.dev/iwut/latest/production.apk");
     }
   }, []);
 
