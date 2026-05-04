@@ -1,15 +1,29 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
   subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  colorScheme: "light dark",
+};
+
 export const metadata: Metadata = {
-  title: "吾理经纬 | 原掌上吾理 APP",
-  description: "一键开启愉快的武汉理工大学校园生活！",
+  title: "掌上吾理",
+  description:
+    "掌上吾理—— 一键开启愉快的武汉理工大学校园生活！",
+  keywords: ["掌上吾理", "吾理经纬", "武汉理工大学", "掌上吾理 Pro", "掌理", "武汉理工", "武理"],
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
@@ -19,12 +33,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#2c5570" />
-      </head>
       <body
-        className={`${geistSans.variable} antialiased`}
+        className={`${manrope.variable} bg-paper text-zinc-800 antialiased transition-colors dark:bg-paper-dark dark:text-zinc-300`}
       >
         {children}
       </body>

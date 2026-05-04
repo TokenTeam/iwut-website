@@ -1,98 +1,10 @@
 @import "tailwindcss";
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
-@keyframes bubble {
-  0% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.8) translate(20px, -100px);
-    opacity: 0;
-  }
-}
-
-.animate-gradient {
-  background: linear-gradient(-45deg, #2c5570, #3d6b8a, #2c5570, #2c5570);
-  background-size: 400% 400%;
-  animation: gradientAnimation 10s ease infinite;
-}
-
-.download-button {
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  font-family: inherit;
-  padding: 0;
-}
-
-@keyframes buttonShine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(200%);
-  }
-}
-
-.download-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg, 
-    transparent 0%,
-    transparent 20%,
-    rgba(255, 255, 255, 0.05) 30%,
-    rgba(255, 255, 255, 0.1) 40%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.1) 60%,
-    rgba(255, 255, 255, 0.05) 70%,
-    transparent 80%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-}
-
-.download-button.shine::before {
-  animation: buttonShine 5s ease-out forwards infinite;
-}
-
-.download-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.bubble {
-  position: absolute;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.bubble:nth-child(1) { width: 60px; height: 60px; animation: bubble 8s infinite; }
-.bubble:nth-child(2) { width: 40px; height: 40px; animation: bubble 10s infinite 2s; }
-.bubble:nth-child(3) { width: 80px; height: 80px; animation: bubble 12s infinite 4s; }
-.bubble:nth-child(4) { width: 50px; height: 50px; animation: bubble 9s infinite 1s; }
-.bubble:nth-child(5) { width: 70px; height: 70px; animation: bubble 11s infinite 3s; }
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+@theme {
+  --color-paper: #fefefb;
+  --color-paper-dark: rgb(28 28 30);
+  --color-accent: #33a6b8;
+  --color-accent-dark: #f596aa;
 }
