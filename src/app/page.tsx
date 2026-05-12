@@ -1,21 +1,18 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import {
-  HiArrowDownTray,
-  HiArrowTopRightOnSquare,
-} from "react-icons/hi2";
-import { SiAndroid, SiApple, SiGithub } from "react-icons/si";
+import { HiArrowDownTray, HiArrowTopRightOnSquare } from "react-icons/hi2";
+import { SiAndroid, SiApple, SiGithub, SiQq } from "react-icons/si";
 import type { DeviceType } from "@/utils/detectDevice";
 import { getDeviceType } from "@/utils/detectDevice";
-import axios from "axios";
 
 const IOS_URL =
   "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E5%90%BE%E7%90%86/id1494650352";
-const ANDROID_URL =
-  "https://download.tokenteam.dev/iwut/latest/production.apk";
+const ANDROID_URL = "https://download.tokenteam.dev/iwut/latest/production.apk";
 const GITHUB_URL = "https://github.com/TokenTeam/iwut";
+const QQ_GROUP_URL = "https://qm.qq.com/q/4uQT2NduJG";
 
 function trackDownload() {
   axios
@@ -59,15 +56,27 @@ export default function Home() {
               掌上吾理
             </p>
           </div>
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-zinc-500 ring-1 ring-zinc-200 transition-colors hover:bg-zinc-50 hover:text-zinc-800 hover:ring-zinc-300 dark:text-zinc-400 dark:ring-zinc-700 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-100 dark:hover:ring-zinc-600"
-          >
-            <SiGithub className="h-5 w-5" aria-hidden />
-          </a>
+          <div className="flex shrink-0 items-center gap-2">
+            <a
+              href={QQ_GROUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="加入 QQ 群"
+              title="加入 QQ 群"
+              className="flex h-10 w-10 items-center justify-center rounded-xl text-zinc-500 ring-1 ring-zinc-200 transition-colors hover:bg-[#12b7f5]/10 hover:text-[#12b7f5] hover:ring-[#12b7f5]/30 dark:text-zinc-400 dark:ring-zinc-700 dark:hover:bg-[#12b7f5]/10 dark:hover:text-[#6ed4ff] dark:hover:ring-[#12b7f5]/30"
+            >
+              <SiQq className="h-5 w-5" aria-hidden />
+            </a>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-10 w-10 items-center justify-center rounded-xl text-zinc-500 ring-1 ring-zinc-200 transition-colors hover:bg-zinc-50 hover:text-zinc-800 hover:ring-zinc-300 dark:text-zinc-400 dark:ring-zinc-700 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-100 dark:hover:ring-zinc-600"
+            >
+              <SiGithub className="h-5 w-5" aria-hidden />
+            </a>
+          </div>
         </div>
       </header>
 
@@ -106,9 +115,15 @@ export default function Home() {
                 <div className="flex items-center gap-3.5 sm:gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark sm:h-11 sm:w-11">
                     {isIOS ? (
-                      <SiApple className="h-5 w-5 sm:h-[18px] sm:w-[18px]" aria-hidden />
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
                     ) : (
-                      <SiAndroid className="h-5 w-5 sm:h-[18px] sm:w-[18px]" aria-hidden />
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
                     )}
                   </div>
                   <div>
@@ -146,9 +161,15 @@ export default function Home() {
                 <div className="flex items-center gap-3.5 sm:gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 sm:h-10 sm:w-10">
                     {isIOS ? (
-                      <SiAndroid className="h-5 w-5 sm:h-[18px] sm:w-[18px]" aria-hidden />
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
                     ) : (
-                      <SiApple className="h-5 w-5 sm:h-[18px] sm:w-[18px]" aria-hidden />
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
                     )}
                   </div>
                   <div>
@@ -175,11 +196,12 @@ export default function Home() {
 
       <footer className="px-6 sm:px-12 pt-16 sm:pt-24 pb-[max(2rem,env(safe-area-inset-bottom))]">
         <div className="mx-auto max-w-2xl border-t border-zinc-200/80 pt-8 text-center dark:border-zinc-700/40">
-          <p
-            className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500"
-          >
+          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500">
             <span className="whitespace-nowrap">(c) 2026 TokenTeam</span>
-            <span className="mx-2 text-zinc-300 select-none dark:text-zinc-600" aria-hidden>
+            <span
+              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
+              aria-hidden
+            >
               ·
             </span>
             <span>
@@ -193,7 +215,10 @@ export default function Home() {
                 zhxycn
               </a>
             </span>
-            <span className="mx-2 text-zinc-300 select-none dark:text-zinc-600" aria-hidden>
+            <span
+              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
+              aria-hidden
+            >
               ·
             </span>
             <a
