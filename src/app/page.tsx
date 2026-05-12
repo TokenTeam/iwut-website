@@ -58,16 +58,6 @@ export default function Home() {
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <a
-              href={QQ_GROUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="加入 QQ 群"
-              title="加入 QQ 群"
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-zinc-500 ring-1 ring-zinc-200 transition-colors hover:bg-[#12b7f5]/10 hover:text-[#12b7f5] hover:ring-[#12b7f5]/30 dark:text-zinc-400 dark:ring-zinc-700 dark:hover:bg-[#12b7f5]/10 dark:hover:text-[#6ed4ff] dark:hover:ring-[#12b7f5]/30"
-            >
-              <SiQq className="h-5 w-5" aria-hidden />
-            </a>
-            <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -191,6 +181,23 @@ export default function Home() {
               </div>
             </a>
           </div>
+
+          <a
+            href={QQ_GROUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-5 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 sm:mt-6"
+          >
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#12b7f5]/10 text-[#12b7f5] transition-colors group-hover:bg-[#12b7f5]/15 dark:bg-[#12b7f5]/15 dark:text-[#6ed4ff]">
+              <SiQq className="h-3.5 w-3.5" aria-hidden />
+            </span>
+            <span className="truncate text-xs sm:text-[13px]">
+              加入 QQ 群，反馈问题
+            </span>
+            <span className="shrink-0 text-zinc-300 transition-all group-hover:translate-x-0.5 group-hover:text-[#12b7f5] dark:text-zinc-600 dark:group-hover:text-[#6ed4ff]">
+              <HiArrowTopRightOnSquare className="h-3.5 w-3.5" aria-hidden />
+            </span>
+          </a>
         </div>
       </main>
 
