@@ -13,6 +13,7 @@ const IOS_URL =
 const ANDROID_URL = "https://download.tokenteam.dev/iwut/latest/production.apk";
 const GITHUB_URL = "https://github.com/TokenTeam/iwut";
 const QQ_GROUP_URL = "https://qm.qq.com/q/4uQT2NduJG";
+const TESTFLIGHT_URL = "https://testflight.apple.com/join/7jtPqWDT";
 
 function trackDownload() {
   axios
@@ -94,92 +95,134 @@ export default function Home() {
           <div className="mt-12 sm:mt-20 w-8 h-px bg-zinc-300 dark:bg-zinc-600" />
 
           <div className="mt-12 sm:mt-20 w-full space-y-3.5">
-            <a
-              href={isIOS ? IOS_URL : ANDROID_URL}
-              target={isIOS ? "_blank" : undefined}
-              rel={isIOS ? "noopener noreferrer" : undefined}
-              onClick={trackDownload}
-              className="group block w-full rounded-2xl border border-accent/30 dark:border-accent-dark/15 bg-accent/[0.05] dark:bg-accent-dark/[0.04] px-5 py-5 sm:px-8 sm:py-7 text-left transition-colors hover:bg-accent/[0.1] dark:hover:bg-accent-dark/[0.08] hover:border-accent/50 dark:hover:border-accent-dark/25"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3.5 sm:gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark sm:h-11 sm:w-11">
-                    {isIOS ? (
-                      <SiApple
-                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                        aria-hidden
-                      />
-                    ) : (
-                      <SiAndroid
-                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                        aria-hidden
-                      />
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <h3 className="text-[15px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-100">
-                        {isIOS ? "iOS" : "Android"}
-                      </h3>
-                      <span className="text-[10px] tracking-wider uppercase text-accent dark:text-accent-dark font-semibold">
-                        推荐
-                      </span>
+            <div className="w-full overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.05] transition-colors hover:border-accent/50 dark:border-accent-dark/15 dark:bg-accent-dark/[0.04] dark:hover:border-accent-dark/25">
+              <a
+                href={isIOS ? IOS_URL : ANDROID_URL}
+                target={isIOS ? "_blank" : undefined}
+                rel={isIOS ? "noopener noreferrer" : undefined}
+                onClick={trackDownload}
+                className="group block px-5 py-5 sm:px-8 sm:py-7 text-left transition-colors hover:bg-accent/[0.05] dark:hover:bg-accent-dark/[0.04]"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3.5 sm:gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark sm:h-11 sm:w-11">
+                      {isIOS ? (
+                        <SiApple
+                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                          aria-hidden
+                        />
+                      ) : (
+                        <SiAndroid
+                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                          aria-hidden
+                        />
+                      )}
                     </div>
-                    <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                      {isIOS ? "前往 App Store" : "直接下载安装包"}
-                    </p>
+                    <div>
+                      <div className="flex items-center gap-2.5">
+                        <h3 className="text-[15px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-100">
+                          {isIOS ? "iOS" : "Android"}
+                        </h3>
+                        <span className="text-[10px] tracking-wider uppercase text-accent dark:text-accent-dark font-semibold">
+                          推荐
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
+                        {isIOS ? "前往 App Store" : "直接下载安装包"}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-zinc-900">
-                  {isIOS ? (
-                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
-                  ) : (
-                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
-                  )}
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={isIOS ? ANDROID_URL : IOS_URL}
-              target={isIOS ? undefined : "_blank"}
-              rel={isIOS ? undefined : "noopener noreferrer"}
-              onClick={trackDownload}
-              className="group block w-full rounded-2xl border border-zinc-200 dark:border-zinc-700/40 bg-transparent dark:bg-white/[0.02] px-5 py-4.5 sm:px-8 sm:py-6 text-left transition-colors hover:border-zinc-300 dark:hover:border-zinc-600/50 hover:bg-zinc-50/50 dark:hover:bg-white/[0.04]"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3.5 sm:gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 sm:h-10 sm:w-10">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-zinc-900">
                     {isIOS ? (
-                      <SiAndroid
-                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                      <HiArrowTopRightOnSquare
+                        className="h-4 w-4"
                         aria-hidden
                       />
                     ) : (
-                      <SiApple
-                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                      <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                    )}
+                  </div>
+                </div>
+              </a>
+              {isIOS && (
+                <a
+                  href={TESTFLIGHT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark sm:text-xs"
+                >
+                  <span className="opacity-80 group-hover:opacity-100">
+                    想尝鲜？加入 TestFlight 内测
+                  </span>
+                  <HiArrowTopRightOnSquare
+                    className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                    aria-hidden
+                  />
+                </a>
+              )}
+            </div>
+
+            <div className="w-full overflow-hidden rounded-2xl border border-zinc-200 bg-transparent transition-colors hover:border-zinc-300 dark:border-zinc-700/40 dark:bg-white/[0.02] dark:hover:border-zinc-600/50">
+              <a
+                href={isIOS ? ANDROID_URL : IOS_URL}
+                target={isIOS ? undefined : "_blank"}
+                rel={isIOS ? undefined : "noopener noreferrer"}
+                onClick={trackDownload}
+                className="group block px-5 py-4.5 sm:px-8 sm:py-6 text-left transition-colors hover:bg-zinc-50/50 dark:hover:bg-white/[0.04]"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3.5 sm:gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 sm:h-10 sm:w-10">
+                      {isIOS ? (
+                        <SiAndroid
+                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                          aria-hidden
+                        />
+                      ) : (
+                        <SiApple
+                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                          aria-hidden
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-[15px] sm:text-sm text-zinc-600 dark:text-zinc-300">
+                        {isIOS ? "Android" : "iOS"}
+                      </h3>
+                      <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
+                        {isIOS ? "直接下载安装包" : "前往 App Store"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
+                    {isIOS ? (
+                      <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                    ) : (
+                      <HiArrowTopRightOnSquare
+                        className="h-4 w-4"
                         aria-hidden
                       />
                     )}
                   </div>
-                  <div>
-                    <h3 className="text-[15px] sm:text-sm text-zinc-600 dark:text-zinc-300">
-                      {isIOS ? "Android" : "iOS"}
-                    </h3>
-                    <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-                      {isIOS ? "直接下载安装包" : "前往 App Store"}
-                    </p>
-                  </div>
                 </div>
-                <div className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
-                  {isIOS ? (
-                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
-                  ) : (
-                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
-                  )}
-                </div>
-              </div>
-            </a>
+              </a>
+              {!isIOS && (
+                <a
+                  href={TESTFLIGHT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark sm:text-xs"
+                >
+                  <span className="opacity-80 group-hover:opacity-100">
+                    想尝鲜？加入 TestFlight 内测
+                  </span>
+                  <HiArrowTopRightOnSquare
+                    className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                    aria-hidden
+                  />
+                </a>
+              )}
+            </div>
           </div>
 
           <a
