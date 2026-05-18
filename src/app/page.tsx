@@ -7,42 +7,12 @@ import { HiArrowDownTray, HiArrowTopRightOnSquare } from "react-icons/hi2";
 import { SiAndroid, SiApple, SiGithub, SiQq } from "react-icons/si";
 import type { DeviceType } from "@/utils/detectDevice";
 import { getDeviceType } from "@/utils/detectDevice";
-import type { IconType } from "react-icons";
 
 const IOS_URL =
   "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E5%90%BE%E7%90%86/id1494650352";
 const ANDROID_URL = "https://download.tokenteam.dev/iwut/latest/production.apk";
 const GITHUB_URL = "https://github.com/TokenTeam/iwut";
 const QQ_GROUP_URL = "https://qm.qq.com/q/4uQT2NduJG";
-
-type DownloadItem = {
-  name: string; url: string; target: "_blank" | undefined;
-  desc: string; Icon: IconType; ActionIcon: IconType;
-};
-
-type PlatformConfig = {
-  logo: string;
-  primary: DownloadItem;
-  secondary: DownloadItem;
-  qqGroupUrl: string;
-  accentStyle: React.CSSProperties | undefined;
-};
-
-const IOS_CONFIG: PlatformConfig = {
-  logo: "/logo-apple.png",
-  primary: { name: "iOS", url: IOS_URL, target: "_blank", desc: "前往 App Store", Icon: SiApple, ActionIcon: HiArrowTopRightOnSquare },
-  secondary: { name: "Android", url: ANDROID_URL, target: undefined, desc: "直接下载安装包", Icon: SiAndroid, ActionIcon: HiArrowDownTray },
-  qqGroupUrl: "https://qm.qq.com/q/BBuhiWM2IM",
-  accentStyle: { "--color-accent": "#0085FF", "--color-accent-dark": "#0085FF" } as React.CSSProperties,
-};
-
-const ANDROID_CONFIG: PlatformConfig = {
-  logo: "/logo.png",
-  primary: { name: "Android", url: ANDROID_URL, target: undefined, desc: "直接下载安装包", Icon: SiAndroid, ActionIcon: HiArrowDownTray },
-  secondary: { name: "iOS", url: IOS_URL, target: "_blank", desc: "前往 App Store", Icon: SiApple, ActionIcon: HiArrowTopRightOnSquare },
-  qqGroupUrl: QQ_GROUP_URL,
-  accentStyle: undefined,
-};
 
 function trackDownload() {
   axios
@@ -65,17 +35,16 @@ export default function Home() {
 
   if (!device) return null;
 
-  const config = device === "iOS" ? IOS_CONFIG : ANDROID_CONFIG;
-  const { primary, secondary } = config;
+  const isIOS = device === "iOS";
 
   return (
-    <div className="min-h-dvh flex flex-col" style={config.accentStyle}>
+    <div className="min-h-dvh flex flex-col">
       <header className="border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.25rem,env(safe-area-inset-top))] pb-3 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 sm:px-12 sm:pb-4 sm:pt-[max(1.5rem,env(safe-area-inset-top))]">
         <div className="mx-auto flex w-full max-w-md items-center justify-between sm:max-w-lg">
           <div className="flex min-w-0 items-center gap-3">
             <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700">
               <Image
-                src={config.logo}
+                src="/logo.png"
                 alt="掌上吾理"
                 fill
                 className="object-contain"
@@ -101,11 +70,11 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-start pt-12 px-6 sm:px-12">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 sm:px-12">
         <div className="max-w-md w-full flex flex-col items-center text-center">
           <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md">
             <Image
-              src={config.logo}
+              src="/logo.png"
               alt="掌上吾理"
               fill
               className="object-contain"
@@ -126,70 +95,98 @@ export default function Home() {
 
           <div className="mt-12 sm:mt-20 w-full space-y-3.5">
             <a
-              href={primary.url}
-              target={primary.target}
-              rel={primary.target ? "noopener noreferrer" : undefined}
+              href={isIOS ? IOS_URL : ANDROID_URL}
+              target={isIOS ? "_blank" : undefined}
+              rel={isIOS ? "noopener noreferrer" : undefined}
               onClick={trackDownload}
-              className="group block w-full rounded-2xl border border-accent/30 dark:border-accent-dark/15 bg-accent/5 dark:bg-accent-dark/4 px-5 py-5 sm:px-8 sm:py-7 text-left transition-colors hover:bg-accent/10 dark:hover:bg-accent-dark/8 hover:border-accent/50 dark:hover:border-accent-dark/25"
+              className="group block w-full rounded-2xl border border-accent/30 dark:border-accent-dark/15 bg-accent/[0.05] dark:bg-accent-dark/[0.04] px-5 py-5 sm:px-8 sm:py-7 text-left transition-colors hover:bg-accent/[0.1] dark:hover:bg-accent-dark/[0.08] hover:border-accent/50 dark:hover:border-accent-dark/25"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3.5 sm:gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark sm:h-11 sm:w-11">
-                    <primary.Icon className="h-5 w-5 sm:h-4.5 sm:w-4.5" aria-hidden />
+                    {isIOS ? (
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    ) : (
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    )}
                   </div>
                   <div>
                     <div className="flex items-center gap-2.5">
                       <h3 className="text-[15px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-100">
-                        {primary.name}
+                        {isIOS ? "iOS" : "Android"}
                       </h3>
                       <span className="text-[10px] tracking-wider uppercase text-accent dark:text-accent-dark font-semibold">
                         推荐
                       </span>
                     </div>
                     <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                      {primary.desc}
+                      {isIOS ? "前往 App Store" : "直接下载安装包"}
                     </p>
                   </div>
                 </div>
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-white">
-                  <primary.ActionIcon className="h-4 w-4" aria-hidden />
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-zinc-900">
+                  {isIOS ? (
+                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
+                  ) : (
+                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                  )}
                 </div>
               </div>
             </a>
 
             <a
-              href={secondary.url}
-              target={secondary.target}
-              rel={secondary.target ? "noopener noreferrer" : undefined}
+              href={isIOS ? ANDROID_URL : IOS_URL}
+              target={isIOS ? undefined : "_blank"}
+              rel={isIOS ? undefined : "noopener noreferrer"}
               onClick={trackDownload}
-              className="group block w-full rounded-2xl border border-zinc-200 dark:border-zinc-700/40 bg-transparent dark:bg-white/2 px-5 py-4.5 sm:px-8 sm:py-6 text-left transition-colors hover:border-zinc-300 dark:hover:border-zinc-600/50 hover:bg-zinc-50/50 dark:hover:bg-white/4"
+              className="group block w-full rounded-2xl border border-zinc-200 dark:border-zinc-700/40 bg-transparent dark:bg-white/[0.02] px-5 py-4.5 sm:px-8 sm:py-6 text-left transition-colors hover:border-zinc-300 dark:hover:border-zinc-600/50 hover:bg-zinc-50/50 dark:hover:bg-white/[0.04]"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3.5 sm:gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 sm:h-10 sm:w-10">
-                    <secondary.Icon className="h-5 w-5 sm:h-4.5 sm:w-4.5" aria-hidden />
+                    {isIOS ? (
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    ) : (
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    )}
                   </div>
                   <div>
                     <h3 className="text-[15px] sm:text-sm text-zinc-600 dark:text-zinc-300">
-                      {secondary.name}
+                      {isIOS ? "Android" : "iOS"}
                     </h3>
                     <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-                      {secondary.desc}
+                      {isIOS ? "直接下载安装包" : "前往 App Store"}
                     </p>
                   </div>
                 </div>
                 <div className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
-                  <secondary.ActionIcon className="h-4 w-4" aria-hidden />
+                  {isIOS ? (
+                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                  ) : (
+                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
+                  )}
                 </div>
               </div>
             </a>
           </div>
 
           <a
-            href={config.qqGroupUrl}
+            href={QQ_GROUP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-5 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/2 transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/4 hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/3 dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/6 dark:hover:text-zinc-200 sm:mt-6"
+            className="group mt-5 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 sm:mt-6"
           >
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#12b7f5]/10 text-[#12b7f5] transition-colors group-hover:bg-[#12b7f5]/15 dark:bg-[#12b7f5]/15 dark:text-[#6ed4ff]">
               <SiQq className="h-3.5 w-3.5" aria-hidden />
@@ -206,7 +203,7 @@ export default function Home() {
 
       <footer className="px-6 sm:px-12 pt-16 sm:pt-24 pb-[max(2rem,env(safe-area-inset-bottom))]">
         <div className="mx-auto max-w-2xl border-t border-zinc-200/80 pt-8 text-center dark:border-zinc-700/40">
-          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] font-features-['liga'_1,'dlig'_1] dark:text-zinc-500">
+          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500">
             <span className="whitespace-nowrap">(c) 2026 TokenTeam</span>
             <span
               className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
