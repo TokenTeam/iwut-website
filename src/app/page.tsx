@@ -19,6 +19,23 @@ const GITHUB_URL = "https://github.com/TokenTeam/iwut";
 const QQ_GROUP_URL = "https://qm.qq.com/q/4uQT2NduJG";
 const TESTFLIGHT_URL = "https://testflight.apple.com/join/7jtPqWDT";
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "掌上吾理",
+  alternateName: ["掌理", "吾理经纬", "掌上吾理 Pro"],
+  operatingSystem: ["iOS", "Android"],
+  description:
+    "掌上吾理是 Token 团队为武汉理工大学学生开发的校园生活应用，提供 iOS、Android 下载与反馈入口。",
+  publisher: {
+    "@type": "Organization",
+    name: "TokenTeam",
+    url: "https://github.com/TokenTeam",
+  },
+  downloadUrl: [IOS_URL, ANDROID_URL],
+  sameAs: [GITHUB_URL, IOS_URL],
+};
+
 function trackDownload() {
   axios
     .get("https://count.api.tokenteam.dev/?project=iwut-download")
@@ -26,7 +43,7 @@ function trackDownload() {
 }
 
 export default function Home() {
-  const [device, setDevice] = useState<DeviceType | null>(null);
+  const [device, setDevice] = useState<DeviceType>("other");
 
   const detectDevice = useCallback(() => {
     setDevice(getDeviceType());
@@ -38,12 +55,13 @@ export default function Home() {
     return () => window.removeEventListener("resize", detectDevice);
   }, [detectDevice]);
 
-  if (!device) return null;
-
   const isIOS = device === "iOS";
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
+      <script id="software-application-schema" type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
       <header className="shrink-0 border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-2.5 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-4 max-[700px]:pb-2 sm:px-12 sm:pt-[max(1.75rem,env(safe-area-inset-top))] sm:pb-3">
         <div className="mx-auto flex w-full max-w-md items-center justify-between sm:max-w-lg">
           <div className="flex min-w-0 items-center gap-3">
