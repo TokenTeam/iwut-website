@@ -3,7 +3,11 @@
 import axios from "axios";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { HiArrowDownTray, HiArrowTopRightOnSquare } from "react-icons/hi2";
+import {
+  HiArrowDownTray,
+  HiArrowTopRightOnSquare,
+  HiLightBulb,
+} from "react-icons/hi2";
 import { SiAndroid, SiApple, SiGithub, SiQq } from "react-icons/si";
 import type { DeviceType } from "@/utils/detectDevice";
 import { getDeviceType } from "@/utils/detectDevice";
@@ -39,11 +43,11 @@ export default function Home() {
   const isIOS = device === "iOS";
 
   return (
-    <div className="min-h-dvh flex flex-col">
-      <header className="border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.25rem,env(safe-area-inset-top))] pb-3 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 sm:px-12 sm:pb-4 sm:pt-[max(1.5rem,env(safe-area-inset-top))]">
+    <div className="flex h-dvh flex-col overflow-hidden">
+      <header className="shrink-0 border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-2.5 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-4 max-[700px]:pb-2 sm:px-12 sm:pt-[max(1.75rem,env(safe-area-inset-top))] sm:pb-3">
         <div className="mx-auto flex w-full max-w-md items-center justify-between sm:max-w-lg">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700">
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700 max-[700px]:h-9 max-[700px]:w-9">
               <Image
                 src="/logo.png"
                 alt="掌上吾理"
@@ -71,9 +75,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-6 sm:px-12">
+      <main className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 py-5 max-[700px]:py-3 sm:px-12 sm:py-6">
         <div className="max-w-md w-full flex flex-col items-center text-center">
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md">
+          <div className="relative h-18 w-18 overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md max-[700px]:h-14 max-[700px]:w-14 sm:h-20 sm:w-20 sm:rounded-3xl">
             <Image
               src="/logo.png"
               alt="掌上吾理"
@@ -84,28 +88,28 @@ export default function Home() {
             />
           </div>
 
-          <h1 className="mt-10 sm:mt-14 text-3xl sm:text-4xl font-light tracking-wide text-accent dark:text-accent-dark">
+          <h1 className="mt-7 text-3xl font-light tracking-wide text-accent dark:text-accent-dark max-[700px]:mt-4 max-[700px]:text-2xl sm:mt-8 sm:text-4xl">
             掌上吾理
           </h1>
 
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
+          <p className="mt-3 text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:mt-2 max-[700px]:text-xs sm:mt-4 sm:text-base">
             一键开启愉快的武汉理工大学校园生活
           </p>
 
-          <div className="mt-12 sm:mt-20 w-8 h-px bg-zinc-300 dark:bg-zinc-600" />
+          <div className="mt-7 h-px w-8 bg-zinc-300 dark:bg-zinc-600 max-[700px]:mt-4 sm:mt-9" />
 
-          <div className="mt-12 sm:mt-20 w-full space-y-3.5">
+          <div className="mt-7 w-full space-y-3 max-[700px]:mt-4 max-[700px]:space-y-2 sm:mt-9">
             <div className="w-full overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.05] transition-colors hover:border-accent/50 dark:border-accent-dark/15 dark:bg-accent-dark/[0.04] dark:hover:border-accent-dark/25">
               <a
                 href={isIOS ? IOS_URL : ANDROID_URL}
                 target={isIOS ? "_blank" : undefined}
                 rel={isIOS ? "noopener noreferrer" : undefined}
                 onClick={trackDownload}
-                className="group block px-5 py-5 sm:px-8 sm:py-7 text-left transition-colors hover:bg-accent/[0.05] dark:hover:bg-accent-dark/[0.04]"
+                className="group block px-5 py-4 text-left transition-colors hover:bg-accent/[0.05] dark:hover:bg-accent-dark/[0.04] max-[700px]:py-3 sm:px-7 sm:py-5"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3.5 sm:gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark sm:h-11 sm:w-11">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark max-[700px]:h-10 max-[700px]:w-10 sm:h-11 sm:w-11">
                       {isIOS ? (
                         <SiApple
                           className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
@@ -149,7 +153,7 @@ export default function Home() {
                   href={TESTFLIGHT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark sm:text-xs"
+                  className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
                 >
                   <span className="opacity-80 group-hover:opacity-100">
                     想尝鲜？加入 TestFlight 内测
@@ -168,11 +172,11 @@ export default function Home() {
                 target={isIOS ? undefined : "_blank"}
                 rel={isIOS ? undefined : "noopener noreferrer"}
                 onClick={trackDownload}
-                className="group block px-5 py-4.5 sm:px-8 sm:py-6 text-left transition-colors hover:bg-zinc-50/50 dark:hover:bg-white/[0.04]"
+                className="group block px-5 py-3.5 text-left transition-colors hover:bg-zinc-50/50 dark:hover:bg-white/[0.04] max-[700px]:py-3 sm:px-7 sm:py-4.5"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3.5 sm:gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 sm:h-10 sm:w-10">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 max-[700px]:h-10 max-[700px]:w-10 sm:h-10 sm:w-10">
                       {isIOS ? (
                         <SiAndroid
                           className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
@@ -211,7 +215,7 @@ export default function Home() {
                   href={TESTFLIGHT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark sm:text-xs"
+                  className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
                 >
                   <span className="opacity-80 group-hover:opacity-100">
                     想尝鲜？加入 TestFlight 内测
@@ -225,11 +229,27 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="mt-4 w-full rounded-xl border border-zinc-200/80 bg-zinc-50/60 px-4 py-3 text-left dark:border-zinc-700/40 dark:bg-white/[0.03] max-[700px]:mt-3 max-[700px]:py-2">
+            <p className="flex items-start gap-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:text-[11px] max-[700px]:leading-snug">
+              <HiLightBulb
+                className="mt-0.5 h-4 w-4 shrink-0 text-amber-400 dark:text-amber-300"
+                aria-hidden
+              />
+              <span>
+                <span className="font-medium text-zinc-600 dark:text-zinc-300">
+                  Tips：
+                </span>
+                “吾理经纬”与“掌上吾理
+                Pro”为版本过渡阶段的差异化应用名称，在正式推出后将改回原名称
+              </span>
+            </p>
+          </div>
+
           <a
             href={QQ_GROUP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-5 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 sm:mt-6"
+            className="group mt-4 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 max-[700px]:mt-3 max-[700px]:py-1.5 sm:mt-5"
           >
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#12b7f5]/10 text-[#12b7f5] transition-colors group-hover:bg-[#12b7f5]/15 dark:bg-[#12b7f5]/15 dark:text-[#6ed4ff]">
               <SiQq className="h-3.5 w-3.5" aria-hidden />
@@ -244,9 +264,9 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="px-6 sm:px-12 pt-16 sm:pt-24 pb-[max(2rem,env(safe-area-inset-bottom))]">
-        <div className="mx-auto max-w-2xl border-t border-zinc-200/80 pt-8 text-center dark:border-zinc-700/40">
-          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500">
+      <footer className="shrink-0 px-6 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-[700px]:pt-2 max-[700px]:pb-2 sm:px-12 sm:pt-5">
+        <div className="mx-auto max-w-2xl border-t border-zinc-200/80 pt-4 text-center dark:border-zinc-700/40 max-[700px]:pt-2">
+          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500 max-[700px]:text-[10px]">
             <span className="whitespace-nowrap">(c) 2026 TokenTeam</span>
             <span
               className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
