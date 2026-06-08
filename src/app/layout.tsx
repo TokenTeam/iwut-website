@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
+import { AppShell } from "@/components/AppShell";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -80,7 +81,7 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} bg-paper text-zinc-800 antialiased transition-colors dark:bg-paper-dark dark:text-zinc-300`}
       >
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

@@ -2,23 +2,22 @@
 
 import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
   HiArrowDownTray,
   HiArrowTopRightOnSquare,
   HiLightBulb,
 } from "react-icons/hi2";
-import { SiAndroid, SiApple, SiGithub, SiQq } from "react-icons/si";
+import { SiAndroid, SiApple, SiQq } from "react-icons/si";
+import {
+  ANDROID_URL,
+  GITHUB_URL,
+  IOS_URL,
+  QQ_GROUP_URL,
+  TESTFLIGHT_URL,
+} from "@/lib/site-links";
 import type { DeviceType } from "@/utils/detectDevice";
 import { getDeviceType } from "@/utils/detectDevice";
-
-const IOS_URL =
-  "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E5%90%BE%E7%90%86/id1494650352";
-const ANDROID_URL = "https://download.tokenteam.dev/iwut/latest/production.apk";
-const GITHUB_URL = "https://github.com/TokenTeam/iwut";
-const QQ_GROUP_URL = "https://qm.qq.com/q/4uQT2NduJG";
-const TESTFLIGHT_URL = "https://testflight.apple.com/join/7jtPqWDT";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -59,293 +58,191 @@ export default function Home() {
   const isIOS = device === "iOS";
 
   return (
-    <div className="flex h-dvh flex-col overflow-hidden">
+    <>
       <script id="software-application-schema" type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>
-      <header className="shrink-0 border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-2.5 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-4 max-[700px]:pb-2 sm:px-12 sm:pt-[max(1.75rem,env(safe-area-inset-top))] sm:pb-3">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700 max-[700px]:h-9 max-[700px]:w-9">
-              <Image
-                src="/logo.png"
-                alt="掌上吾理"
-                fill
-                className="object-contain"
-                priority
-                unoptimized
-              />
-            </div>
-            <p className="truncate text-sm font-medium tracking-wide text-zinc-800 dark:text-zinc-200">
-              掌上吾理
-            </p>
-          </div>
-          <div className="flex shrink-0 items-center gap-2">
+
+      <div className="max-w-md w-full flex flex-col items-center text-center">
+        <div className="relative h-18 w-18 overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md max-[700px]:h-16 max-[700px]:w-16 sm:h-20 sm:w-20 sm:rounded-3xl">
+          <Image
+            src="/logo.png"
+            alt="掌上吾理"
+            fill
+            className="object-contain"
+            priority
+            unoptimized
+          />
+        </div>
+
+        <h1 className="mt-7 text-3xl font-light tracking-wide text-accent dark:text-accent-dark max-[700px]:mt-4 max-[700px]:text-[28px] sm:mt-8 sm:text-4xl">
+          掌上吾理
+        </h1>
+
+        <p className="mt-3 text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:mt-2 max-[700px]:text-sm sm:mt-4 sm:text-base">
+          一键开启愉快的武汉理工大学校园生活
+        </p>
+
+        <div className="mt-7 h-px w-8 bg-zinc-300 dark:bg-zinc-600 max-[700px]:mt-4 sm:mt-9" />
+
+        <div className="mt-7 w-full space-y-3 max-[700px]:mt-4 max-[700px]:space-y-2 sm:mt-9">
+          <div className="w-full overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.05] transition-colors hover:border-accent/50 dark:border-accent-dark/15 dark:bg-accent-dark/[0.04] dark:hover:border-accent-dark/25">
             <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-zinc-500 ring-1 ring-zinc-200 transition-colors hover:bg-zinc-50 hover:text-zinc-800 hover:ring-zinc-300 dark:text-zinc-400 dark:ring-zinc-700 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-100 dark:hover:ring-zinc-600"
+              href={isIOS ? IOS_URL : ANDROID_URL}
+              target={isIOS ? "_blank" : undefined}
+              rel={isIOS ? "noopener noreferrer" : undefined}
+              onClick={trackDownload}
+              className="group block px-5 py-4 text-left transition-colors hover:bg-accent/[0.05] dark:hover:bg-accent-dark/[0.04] max-[700px]:py-3 sm:px-7 sm:py-5"
             >
-              <SiGithub className="h-5 w-5" aria-hidden />
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <main className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 py-5 max-[700px]:py-3 sm:px-12 sm:py-6">
-        <div className="max-w-md w-full flex flex-col items-center text-center">
-          <div className="relative h-18 w-18 overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md max-[700px]:h-16 max-[700px]:w-16 sm:h-20 sm:w-20 sm:rounded-3xl">
-            <Image
-              src="/logo.png"
-              alt="掌上吾理"
-              fill
-              className="object-contain"
-              priority
-              unoptimized
-            />
-          </div>
-
-          <h1 className="mt-7 text-3xl font-light tracking-wide text-accent dark:text-accent-dark max-[700px]:mt-4 max-[700px]:text-[28px] sm:mt-8 sm:text-4xl">
-            掌上吾理
-          </h1>
-
-          <p className="mt-3 text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:mt-2 max-[700px]:text-sm sm:mt-4 sm:text-base">
-            一键开启愉快的武汉理工大学校园生活
-          </p>
-
-          <div className="mt-7 h-px w-8 bg-zinc-300 dark:bg-zinc-600 max-[700px]:mt-4 sm:mt-9" />
-
-          <div className="mt-7 w-full space-y-3 max-[700px]:mt-4 max-[700px]:space-y-2 sm:mt-9">
-            <div className="w-full overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.05] transition-colors hover:border-accent/50 dark:border-accent-dark/15 dark:bg-accent-dark/[0.04] dark:hover:border-accent-dark/25">
-              <a
-                href={isIOS ? IOS_URL : ANDROID_URL}
-                target={isIOS ? "_blank" : undefined}
-                rel={isIOS ? "noopener noreferrer" : undefined}
-                onClick={trackDownload}
-                className="group block px-5 py-4 text-left transition-colors hover:bg-accent/[0.05] dark:hover:bg-accent-dark/[0.04] max-[700px]:py-3 sm:px-7 sm:py-5"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3.5 sm:gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark max-[700px]:h-10 max-[700px]:w-10 sm:h-11 sm:w-11">
-                      {isIOS ? (
-                        <SiApple
-                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                          aria-hidden
-                        />
-                      ) : (
-                        <SiAndroid
-                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                          aria-hidden
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2.5">
-                        <h3 className="text-[15px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-100">
-                          {isIOS ? "iOS" : "Android"}
-                        </h3>
-                        <span className="text-[10px] tracking-wider uppercase text-accent dark:text-accent-dark font-semibold">
-                          推荐
-                        </span>
-                      </div>
-                      <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                        {isIOS ? "前往 App Store" : "直接下载安装包"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-zinc-900">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent dark:bg-accent-dark/8 dark:text-accent-dark max-[700px]:h-10 max-[700px]:w-10 sm:h-11 sm:w-11">
                     {isIOS ? (
-                      <HiArrowTopRightOnSquare
-                        className="h-4 w-4"
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
                         aria-hidden
                       />
                     ) : (
-                      <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
                     )}
                   </div>
-                </div>
-              </a>
-              {isIOS && (
-                <a
-                  href={TESTFLIGHT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
-                >
-                  <span className="opacity-80 group-hover:opacity-100">
-                    想尝鲜？加入 TestFlight 内测
-                  </span>
-                  <HiArrowTopRightOnSquare
-                    className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
-                    aria-hidden
-                  />
-                </a>
-              )}
-            </div>
-
-            <div className="w-full overflow-hidden rounded-2xl border border-zinc-200 bg-transparent transition-colors hover:border-zinc-300 dark:border-zinc-700/40 dark:bg-white/[0.02] dark:hover:border-zinc-600/50">
-              <a
-                href={isIOS ? ANDROID_URL : IOS_URL}
-                target={isIOS ? undefined : "_blank"}
-                rel={isIOS ? undefined : "noopener noreferrer"}
-                onClick={trackDownload}
-                className="group block px-5 py-3.5 text-left transition-colors hover:bg-zinc-50/50 dark:hover:bg-white/[0.04] max-[700px]:py-3 sm:px-7 sm:py-4.5"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3.5 sm:gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 max-[700px]:h-10 max-[700px]:w-10 sm:h-10 sm:w-10">
-                      {isIOS ? (
-                        <SiAndroid
-                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                          aria-hidden
-                        />
-                      ) : (
-                        <SiApple
-                          className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
-                          aria-hidden
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="text-[15px] sm:text-sm text-zinc-600 dark:text-zinc-300">
-                        {isIOS ? "Android" : "iOS"}
+                  <div>
+                    <div className="flex items-center gap-2.5">
+                      <h3 className="text-[15px] sm:text-sm font-medium text-zinc-800 dark:text-zinc-100">
+                        {isIOS ? "iOS" : "Android"}
                       </h3>
-                      <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-                        {isIOS ? "直接下载安装包" : "前往 App Store"}
-                      </p>
+                      <span className="text-[10px] tracking-wider uppercase text-accent dark:text-accent-dark font-semibold">
+                        推荐
+                      </span>
                     </div>
-                  </div>
-                  <div className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
-                    {isIOS ? (
-                      <HiArrowDownTray className="h-4 w-4" aria-hidden />
-                    ) : (
-                      <HiArrowTopRightOnSquare
-                        className="h-4 w-4"
-                        aria-hidden
-                      />
-                    )}
+                    <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
+                      {isIOS ? "前往 App Store" : "直接下载安装包"}
+                    </p>
                   </div>
                 </div>
-              </a>
-              {!isIOS && (
-                <a
-                  href={TESTFLIGHT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
-                >
-                  <span className="opacity-80 group-hover:opacity-100">
-                    想尝鲜？加入 TestFlight 内测
-                  </span>
-                  <HiArrowTopRightOnSquare
-                    className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
-                    aria-hidden
-                  />
-                </a>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-4 w-full rounded-xl border border-zinc-200/80 bg-zinc-50/60 px-4 py-3 text-left dark:border-zinc-700/40 dark:bg-white/[0.03] max-[700px]:mt-3 max-[700px]:py-2">
-            <p className="flex items-start gap-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:text-[11px] max-[700px]:leading-snug">
-              <HiLightBulb
-                className="mt-0.5 h-4 w-4 shrink-0 text-amber-400 dark:text-amber-300"
-                aria-hidden
-              />
-              <span>
-                <span className="font-medium text-zinc-600 dark:text-zinc-300">
-                  Tips：
-                </span>
-                “吾理经纬”与“掌上吾理
-                Pro”为版本过渡阶段的差异化应用名称，在正式推出后将改回原名称
-              </span>
-            </p>
-          </div>
-
-          <a
-            href={QQ_GROUP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-4 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 max-[700px]:mt-3 max-[700px]:py-1.5 sm:mt-5"
-          >
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#12b7f5]/10 text-[#12b7f5] transition-colors group-hover:bg-[#12b7f5]/15 dark:bg-[#12b7f5]/15 dark:text-[#6ed4ff]">
-              <SiQq className="h-3.5 w-3.5" aria-hidden />
-            </span>
-            <span className="truncate text-xs sm:text-[13px]">
-              加入 QQ 群，反馈问题
-            </span>
-            <span className="shrink-0 text-zinc-300 transition-all group-hover:translate-x-0.5 group-hover:text-[#12b7f5] dark:text-zinc-600 dark:group-hover:text-[#6ed4ff]">
-              <HiArrowTopRightOnSquare className="h-3.5 w-3.5" aria-hidden />
-            </span>
-          </a>
-        </div>
-      </main>
-
-      <footer className="shrink-0 border-t border-zinc-200/70 bg-paper/80 px-6 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-2.5 max-[700px]:pb-2 sm:px-12 sm:pt-5">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500 max-[700px]:text-[10px] max-[700px]:leading-5">
-            <span className="whitespace-nowrap">(c) 2026 TokenTeam</span>
-            <span
-              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
-              aria-hidden
-            >
-              ·
-            </span>
-            <span>
-              This site was built with <span aria-hidden="true">❤</span> by{" "}
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-white transition-transform group-hover:scale-105 dark:bg-accent-dark dark:text-zinc-900">
+                  {isIOS ? (
+                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
+                  ) : (
+                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                  )}
+                </div>
+              </div>
+            </a>
+            {isIOS && (
               <a
-                href="https://owo.cab"
+                href={TESTFLIGHT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
+                className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
               >
-                zhxycn
+                <span className="opacity-80 group-hover:opacity-100">
+                  想尝鲜？加入 TestFlight 内测
+                </span>
+                <HiArrowTopRightOnSquare
+                  className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  aria-hidden
+                />
               </a>
-            </span>
-            <span
-              className="mx-2 text-zinc-300 select-none dark:text-zinc-600 max-[700px]:hidden"
-              aria-hidden
-            >
-              ·
-            </span>
-            <br className="hidden max-[700px]:block" />
-            <Link
-              href="/legal/user-agreement"
-              className="whitespace-nowrap text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
-            >
-              用户协议
-            </Link>
-            <span
-              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
-              aria-hidden
-            >
-              ·
-            </span>
-            <Link
-              href="/legal/privacy-policy"
-              className="whitespace-nowrap text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
-            >
-              隐私政策
-            </Link>
-            <span
-              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
-              aria-hidden
-            >
-              ·
-            </span>
+            )}
+          </div>
+
+          <div className="w-full overflow-hidden rounded-2xl border border-zinc-200 bg-transparent transition-colors hover:border-zinc-300 dark:border-zinc-700/40 dark:bg-white/[0.02] dark:hover:border-zinc-600/50">
             <a
-              href="https://beian.miit.gov.cn/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whitespace-nowrap text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
+              href={isIOS ? ANDROID_URL : IOS_URL}
+              target={isIOS ? undefined : "_blank"}
+              rel={isIOS ? undefined : "noopener noreferrer"}
+              onClick={trackDownload}
+              className="group block px-5 py-3.5 text-left transition-colors hover:bg-zinc-50/50 dark:hover:bg-white/[0.04] max-[700px]:py-3 sm:px-7 sm:py-4.5"
             >
-              陕ICP备2025063787号
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100/70 text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400 max-[700px]:h-10 max-[700px]:w-10 sm:h-10 sm:w-10">
+                    {isIOS ? (
+                      <SiAndroid
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    ) : (
+                      <SiApple
+                        className="h-5 w-5 sm:h-[18px] sm:w-[18px]"
+                        aria-hidden
+                      />
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="text-[15px] sm:text-sm text-zinc-600 dark:text-zinc-300">
+                      {isIOS ? "Android" : "iOS"}
+                    </h3>
+                    <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
+                      {isIOS ? "直接下载安装包" : "前往 App Store"}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
+                  {isIOS ? (
+                    <HiArrowDownTray className="h-4 w-4" aria-hidden />
+                  ) : (
+                    <HiArrowTopRightOnSquare className="h-4 w-4" aria-hidden />
+                  )}
+                </div>
+              </div>
             </a>
+            {!isIOS && (
+              <a
+                href={TESTFLIGHT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
+              >
+                <span className="opacity-80 group-hover:opacity-100">
+                  想尝鲜？加入 TestFlight 内测
+                </span>
+                <HiArrowTopRightOnSquare
+                  className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  aria-hidden
+                />
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-4 w-full rounded-xl border border-zinc-200/80 bg-zinc-50/60 px-4 py-3 text-left dark:border-zinc-700/40 dark:bg-white/[0.03] max-[700px]:mt-3 max-[700px]:py-2">
+          <p className="flex items-start gap-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:text-[11px] max-[700px]:leading-snug">
+            <HiLightBulb
+              className="mt-0.5 h-4 w-4 shrink-0 text-amber-400 dark:text-amber-300"
+              aria-hidden
+            />
+            <span>
+              <span className="font-medium text-zinc-600 dark:text-zinc-300">
+                Tips：
+              </span>
+              “吾理经纬”与“掌上吾理
+              Pro”为版本过渡阶段的差异化应用名称，在正式推出后将改回原名称
+            </span>
           </p>
         </div>
-      </footer>
-    </div>
+
+        <a
+          href={QQ_GROUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-4 inline-flex max-w-full items-center gap-2.5 rounded-full border border-zinc-200/80 bg-white/40 px-3.5 py-2 text-left text-zinc-500 shadow-sm shadow-zinc-900/[0.02] transition-all hover:border-[#12b7f5]/35 hover:bg-[#12b7f5]/[0.04] hover:text-zinc-700 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:text-zinc-400 dark:shadow-none dark:hover:border-[#12b7f5]/35 dark:hover:bg-[#12b7f5]/[0.06] dark:hover:text-zinc-200 max-[700px]:mt-3 max-[700px]:py-1.5 sm:mt-5"
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#12b7f5]/10 text-[#12b7f5] transition-colors group-hover:bg-[#12b7f5]/15 dark:bg-[#12b7f5]/15 dark:text-[#6ed4ff]">
+            <SiQq className="h-3.5 w-3.5" aria-hidden />
+          </span>
+          <span className="truncate text-xs sm:text-[13px]">
+            加入 QQ 群，反馈问题
+          </span>
+          <span className="shrink-0 text-zinc-300 transition-all group-hover:translate-x-0.5 group-hover:text-[#12b7f5] dark:text-zinc-600 dark:group-hover:text-[#6ed4ff]">
+            <HiArrowTopRightOnSquare className="h-3.5 w-3.5" aria-hidden />
+          </span>
+        </a>
+      </div>
+    </>
   );
 }
