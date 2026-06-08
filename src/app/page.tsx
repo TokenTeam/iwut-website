@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
   HiArrowDownTray,
@@ -63,7 +64,7 @@ export default function Home() {
         {JSON.stringify(structuredData)}
       </script>
       <header className="shrink-0 border-b border-zinc-200/70 bg-paper/80 px-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-2.5 backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-4 max-[700px]:pb-2 sm:px-12 sm:pt-[max(1.75rem,env(safe-area-inset-top))] sm:pb-3">
-        <div className="mx-auto flex w-full max-w-md items-center justify-between sm:max-w-lg">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
           <div className="flex min-w-0 items-center gap-3">
             <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700 max-[700px]:h-9 max-[700px]:w-9">
               <Image
@@ -95,7 +96,7 @@ export default function Home() {
 
       <main className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 py-5 max-[700px]:py-3 sm:px-12 sm:py-6">
         <div className="max-w-md w-full flex flex-col items-center text-center">
-          <div className="relative h-18 w-18 overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md max-[700px]:h-14 max-[700px]:w-14 sm:h-20 sm:w-20 sm:rounded-3xl">
+          <div className="relative h-18 w-18 overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-900/5 dark:ring-white/15 dark:shadow-md max-[700px]:h-16 max-[700px]:w-16 sm:h-20 sm:w-20 sm:rounded-3xl">
             <Image
               src="/logo.png"
               alt="掌上吾理"
@@ -106,11 +107,11 @@ export default function Home() {
             />
           </div>
 
-          <h1 className="mt-7 text-3xl font-light tracking-wide text-accent dark:text-accent-dark max-[700px]:mt-4 max-[700px]:text-2xl sm:mt-8 sm:text-4xl">
+          <h1 className="mt-7 text-3xl font-light tracking-wide text-accent dark:text-accent-dark max-[700px]:mt-4 max-[700px]:text-[28px] sm:mt-8 sm:text-4xl">
             掌上吾理
           </h1>
 
-          <p className="mt-3 text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:mt-2 max-[700px]:text-xs sm:mt-4 sm:text-base">
+          <p className="mt-3 text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 max-[700px]:mt-2 max-[700px]:text-sm sm:mt-4 sm:text-base">
             一键开启愉快的武汉理工大学校园生活
           </p>
 
@@ -282,9 +283,9 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="shrink-0 px-6 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-[700px]:pt-2 max-[700px]:pb-2 sm:px-12 sm:pt-5">
-        <div className="mx-auto max-w-2xl border-t border-zinc-200/80 pt-4 text-center dark:border-zinc-700/40 max-[700px]:pt-2">
-          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500 max-[700px]:text-[10px]">
+      <footer className="shrink-0 border-t border-zinc-200/70 bg-paper/80 px-6 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-sm dark:border-zinc-800/50 dark:bg-paper-dark/80 max-[700px]:pt-2.5 max-[700px]:pb-2 sm:px-12 sm:pt-5">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-[11px] leading-relaxed tracking-wide text-zinc-400 [font-family:var(--font-manrope),ui-sans-serif,system-ui,sans-serif] [font-feature-settings:'liga'_1,'dlig'_1] dark:text-zinc-500 max-[700px]:text-[10px] max-[700px]:leading-5">
             <span className="whitespace-nowrap">(c) 2026 TokenTeam</span>
             <span
               className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
@@ -303,6 +304,31 @@ export default function Home() {
                 zhxycn
               </a>
             </span>
+            <span
+              className="mx-2 text-zinc-300 select-none dark:text-zinc-600 max-[700px]:hidden"
+              aria-hidden
+            >
+              ·
+            </span>
+            <br className="hidden max-[700px]:block" />
+            <Link
+              href="/legal/user-agreement"
+              className="whitespace-nowrap text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
+            >
+              用户协议
+            </Link>
+            <span
+              className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
+              aria-hidden
+            >
+              ·
+            </span>
+            <Link
+              href="/legal/privacy-policy"
+              className="whitespace-nowrap text-zinc-500 underline-offset-2 transition-colors hover:text-accent hover:underline dark:text-zinc-400 dark:hover:text-accent-dark"
+            >
+              隐私政策
+            </Link>
             <span
               className="mx-2 text-zinc-300 select-none dark:text-zinc-600"
               aria-hidden
