@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function Share() {
+function ShareContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -49,5 +49,13 @@ export default function Share() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function Share() {
+  return (
+    <Suspense fallback={null}>
+      <ShareContent />
+    </Suspense>
   );
 }
