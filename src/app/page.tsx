@@ -14,7 +14,6 @@ import {
   GITHUB_URL,
   IOS_URL,
   QQ_GROUP_URL,
-  TESTFLIGHT_URL,
 } from "@/lib/site-links";
 import type { DeviceType } from "@/utils/detectDevice";
 import { getDeviceType } from "@/utils/detectDevice";
@@ -119,7 +118,7 @@ export default function Home() {
                       </span>
                     </div>
                     <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                      {isIOS ? "前往 App Store" : "直接下载安装包"}
+                      {isIOS ? "加入 TestFlight 内测" : "直接下载安装包"}
                     </p>
                   </div>
                 </div>
@@ -132,22 +131,6 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            {isIOS && (
-              <a
-                href={TESTFLIGHT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-1.5 border-t border-accent/15 px-4 py-2.5 text-[11px] text-zinc-500 transition-colors hover:bg-accent/[0.04] hover:text-accent dark:border-accent-dark/10 dark:text-zinc-400 dark:hover:bg-accent-dark/[0.05] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
-              >
-                <span className="opacity-80 group-hover:opacity-100">
-                  想尝鲜？加入 TestFlight 内测
-                </span>
-                <HiArrowTopRightOnSquare
-                  className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
-                  aria-hidden
-                />
-              </a>
-            )}
           </div>
 
           <div className="w-full overflow-hidden rounded-2xl border border-zinc-200 bg-transparent transition-colors hover:border-zinc-300 dark:border-zinc-700/40 dark:bg-white/[0.02] dark:hover:border-zinc-600/50">
@@ -178,7 +161,7 @@ export default function Home() {
                       {isIOS ? "Android" : "iOS"}
                     </h3>
                     <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
-                      {isIOS ? "直接下载安装包" : "前往 App Store"}
+                      {isIOS ? "直接下载安装包" : "加入 TestFlight 内测"}
                     </p>
                   </div>
                 </div>
@@ -191,22 +174,6 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            {!isIOS && (
-              <a
-                href={TESTFLIGHT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-1.5 border-t border-zinc-200 px-4 py-2.5 text-[11px] text-zinc-400 transition-colors hover:bg-zinc-50/60 hover:text-accent dark:border-zinc-700/40 dark:text-zinc-500 dark:hover:bg-white/[0.03] dark:hover:text-accent-dark max-[700px]:py-2 sm:text-xs"
-              >
-                <span className="opacity-80 group-hover:opacity-100">
-                  想尝鲜？加入 TestFlight 内测
-                </span>
-                <HiArrowTopRightOnSquare
-                  className="h-3 w-3 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
-                  aria-hidden
-                />
-              </a>
-            )}
           </div>
         </div>
 
